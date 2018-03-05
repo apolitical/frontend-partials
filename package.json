@@ -5,6 +5,8 @@
   "description": "Profile browser frontend application for Apolitical",
   "main": "index.js",
   "scripts": {
+    "dev": "webpack-dev-server --config webpack.config.js --mode development",
+    "build": "mkdir -p dist && cp src/index.html dist/index.html && webpack --config webpack.config.js --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,5 +18,10 @@
   "bugs": {
     "url": "https://github.com/apolitical/profile/issues"
   },
-  "homepage": "https://github.com/apolitical/profile#readme"
+  "homepage": "https://github.com/apolitical/profile#readme",
+  "dependencies": {
+    "webpack": "^4.1.0",
+    "webpack-cli": "^2.0.10",
+    "webpack-dev-server": "^3.1.0"
+  }
 }

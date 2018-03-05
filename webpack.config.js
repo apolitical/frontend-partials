@@ -1,7 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/index.jsx',
   output: {
     path: __dirname + '/dist',
     filename: 'index.js',
@@ -10,19 +10,25 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: __dirname + '/src/index.html',
-      title: 'Custom template',
+      title: 'Apolitical Profiles',
     })
   ],
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
+        loader: 'babel-loader',
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {}
+        query: {
+          presets: ['es2015', 'react']
         }
       }
     ]
+  },
+  devServer: {
+    noInfo: true,
   }
 };

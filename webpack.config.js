@@ -12,5 +12,17 @@ module.exports = {
       template: __dirname + '/src/index.html',
       title: 'Custom template',
     })
-  ]
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {}
+        }
+      }
+    ]
+  }
 };

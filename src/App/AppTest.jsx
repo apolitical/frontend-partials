@@ -16,6 +16,11 @@ describe('App', () => {
   });
 
   it('should be clickable', () => {
+    const app = shallow(<App />);
+    app.simulate('click');
+  });
+
+  it('should have a customisable onclick', () => {
     const callback = spy();
     const app = shallow(<App onclick={callback} />);
     app.simulate('click');

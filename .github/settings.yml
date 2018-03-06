@@ -1,0 +1,47 @@
+repository:
+  has_issues: true
+  has_wiki: false
+  has_downloads: false
+  default_branch: master
+  allow_squash_merge: true
+  allow_merge_commit: true
+  allow_rebase_merge: false
+
+# Labels: define labels for Issues and Pull Requests
+labels:
+  - name: "good first issue :baby_bottle:"
+    color: 7057ff
+    oldname: "good first issue"
+  - name: "bug :bug:"
+    color: ee0701
+    oldname: "bug"
+  - name: "duplicate :cat::cat:"
+    color: cccccc
+    oldname: "duplicate"    
+  - name: "large :elephant:"
+    color: ff3f0b
+    oldname: "large"
+  - name: "medium :horse:"
+    color: fbca04
+    oldname: "medium"
+  - name: "small :mouse:"
+    color: 0e8a16
+    oldname: "small"
+  - name: "enhancement :tada:"
+    color: 84b6eb
+    oldname: "enhancement"
+  - name: "critical :warning:"
+    color: ff0000
+    oldname: "CRITICAL"
+  - name: "help wanted :sos:"
+    color: 33aa3f
+    oldname: "help wanted"
+  - name: "security :key:"
+    color: ff69b4
+    oldname: "security"
+  - name: "question :grey_question:"
+    color: cc317c
+    oldname: "question"
+  - name: "wontfix :no_good_woman:"
+    color: e6e6e6
+    oldname: "wontfix"

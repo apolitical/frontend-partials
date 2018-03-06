@@ -70,6 +70,10 @@ module.exports = (config) => {
 
     webpack: webpackConfig,
 
+    webpackMiddleware: {
+      stats: webpackConfig.stats,
+    },
+
     plugins: [
       karmaWebpack,
       karmaMocha,

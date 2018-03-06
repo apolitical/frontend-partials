@@ -24,6 +24,9 @@ jobs:
     - run:
         name: run tests
         command: npm run test
+    - run:
+        name: run coverage
+        command: npm run coverage
 
 
 workflows:

@@ -5,6 +5,7 @@
   "description": "Profile browser frontend application for Apolitical",
   "main": "index.js",
   "scripts": {
+    "coverage": "codecov -f coverage/lcov.txt",
     "dev": "webpack-dev-server -d --open",
     "build": "webpack --config webpack.config.js",
     "lint": "eslint --ext .jsx --ext .js src/",
@@ -35,6 +36,7 @@
     "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.24.1",
     "chai": "^4.1.2",
+    "codecov": "^3.0.0",
     "concurrently": "^3.5.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",

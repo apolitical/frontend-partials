@@ -3,7 +3,7 @@ const karmaMocha = require('karma-mocha');
 const karmaNyanReporter = require('karma-nyan-reporter');
 const karmaPhantomJsLauncher = require('karma-phantomjs-launcher');
 const karmaWebpack = require('karma-webpack');
-const webpackConfig = require('./webpack.config');
+const webpack = require('./helpers/webpack.defaults');
 
 const filesToTest = [ 'karma.test.js' ];
 
@@ -21,9 +21,6 @@ const preprocessorMap = (prev, cur) => ({
 });
 
 const preprocessors = filesToProcess.reduce(preprocessorMap, {});
-
-// Remove default plugins.
-webpackConfig.plugins = [];
 
 
 module.exports = (config) => {
@@ -87,10 +84,10 @@ module.exports = (config) => {
 
     preprocessors,
 
-    webpack: webpackConfig,
+    webpack,
 
     webpackMiddleware: {
-      stats: webpackConfig.stats,
+      stats: webpack.stats,
     },
 
     plugins: [

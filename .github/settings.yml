@@ -9,6 +9,8 @@ repository:
 
 # Labels: define labels for Issues and Pull Requests
 labels:
+  - name: "epic :book:"
+    color: 19a9b7
   - name: "good first issue :baby_bottle:"
     color: 7057ff
     oldname: "good first issue"

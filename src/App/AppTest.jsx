@@ -1,13 +1,10 @@
 import React from 'react';
+import { shallow } from 'enzyme';
 import App from './App';
-import assert from 'assert';
 
 describe('App', () => {
   it('should default to "Hello World"', () => {
-
-    const app = <App />;
-    assert(app);
-    expect('this').to.not.equal('that');
-
+    const app = shallow(<App />);
+    expect(app.text()).to.equal('Hello World');
   });
 });

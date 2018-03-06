@@ -4,8 +4,22 @@ const karmaWebpack = require('karma-webpack');
 const karmaPhantomJsLauncher = require('karma-phantomjs-launcher');
 const webpackConfig = require('./webpack.config');
 
-const filesToTest = [ 'src/**/*Test.jsx' ];
-const filesToProcess = [ 'src/**/*.jsx' ];
+const filesToTest = [ 'karma.test.js' ];
+
+const filesToProcess = [
+  'karma.test.js',
+  'helpers/*.js',
+  'helpers/*.jsx',
+  'src/**/*.js',
+  'src/**/*.jsx'
+];
+
+const preprocessorMap = (prev, cur) => ({
+  ...prev,
+  [cur]: ['webpack']
+});
+
+const preprocessors = filesToProcess.reduce(preprocessorMap, {});
 
 // Remove default plugins.
 webpackConfig.plugins = [];
@@ -70,7 +84,7 @@ module.exports = (config) => {
     // how many browser should be started simultaneous
     concurrency: Infinity,
 
-    preprocessors: filesToProcess.reduce((prev, cur) => ({...prev, [cur]: ['webpack'] }), {}),
+    preprocessors,
 
     webpack: webpackConfig,
 

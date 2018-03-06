@@ -1,7 +1,8 @@
 const karmaChai = require('karma-chai');
 const karmaMocha = require('karma-mocha');
-const karmaWebpack = require('karma-webpack');
+const karmaNyanReporter = require('karma-nyan-reporter');
 const karmaPhantomJsLauncher = require('karma-phantomjs-launcher');
+const karmaWebpack = require('karma-webpack');
 const webpackConfig = require('./webpack.config');
 
 const filesToTest = [ 'karma.test.js' ];
@@ -49,7 +50,7 @@ module.exports = (config) => {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    reporters: ['nyan'],
 
 
     // web server port
@@ -95,8 +96,9 @@ module.exports = (config) => {
     plugins: [
       karmaChai,
       karmaMocha,
-      karmaWebpack,
+      karmaNyanReporter,
       karmaPhantomJsLauncher,
+      karmaWebpack,
     ],
   });
 };

@@ -7,6 +7,7 @@ describe('App', () => {
 
     const app = <App />;
     assert(app);
+    expect('this').to.not.equal('that');
 
   });
 });

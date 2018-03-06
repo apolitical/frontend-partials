@@ -1,5 +1,6 @@
-const karmaWebpack = require('karma-webpack');
+const karmaChai = require('karma-chai');
 const karmaMocha = require('karma-mocha');
+const karmaWebpack = require('karma-webpack');
 const karmaPhantomJsLauncher = require('karma-phantomjs-launcher');
 const webpackConfig = require('./webpack.config');
 
@@ -19,7 +20,10 @@ module.exports = (config) => {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['mocha'],
+    frameworks: [
+      'chai',
+      'mocha',
+    ],
 
 
     // list of files / patterns to load in the browser
@@ -75,8 +79,9 @@ module.exports = (config) => {
     },
 
     plugins: [
-      karmaWebpack,
+      karmaChai,
       karmaMocha,
+      karmaWebpack,
       karmaPhantomJsLauncher,
     ],
   });

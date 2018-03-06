@@ -58,6 +58,7 @@ module.exports = (config) => {
       reporters: [
         // reporters not supporting the `file` property
         { type: 'html' },
+        { type: 'lcovonly', subdir: '.', file: 'lcov.txt'},
         { type: 'text-summary' },
       ],
     },

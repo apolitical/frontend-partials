@@ -1,11 +1,3 @@
 [include]
-
-[ignore]
-
-[libs]
-
-[lints]
-
-[options]
-
-[version]
+src/**/*.js
+src/**/*.jsx

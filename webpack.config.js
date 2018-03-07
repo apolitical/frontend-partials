@@ -4,8 +4,6 @@ const WebpackCdnPlugin = require('webpack-cdn-plugin');
 const webpackDefaults = require('./helpers/webpack.defaults');
 
 const prod = process.env.NODE_ENV !== 'development';
-const cdnEnv = prod ? 'production.min' : 'development' ;
-
 
 const webpackConfig   = {
   ...webpackDefaults,
@@ -35,8 +33,10 @@ const webpackConfig   = {
       prod,
       modules: {
         'react': [
-          { name: 'react', var: 'React', path: `umd/react.${cdnEnv}.js` },
-          { name: 'react-dom', var: 'ReactDOM', path: `umd/react-dom.${cdnEnv}.js` },
+          { name: 'react', var: 'React', path: `umd/react.${prod ? 'production.min' : 'development'}.js` },
+          { name: 'react-dom', var: 'ReactDOM', path: `umd/react-dom.${prod ? 'production.min' : 'development'}.js` },
+          { name: 'react-redux', var: 'ReactRedux', path: `dist/react-redux${prod ? '.min' : ''}.js` },
+          { name: 'redux', var: 'Redux', path: `dist/redux${prod ? '.min' : ''}.js` },
         ]
       },
       publicPath: '/node_modules'

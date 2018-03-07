@@ -12,6 +12,7 @@ module.exports = {
     should: true,
   },
   rules: {
-    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*Test.jsx"]}]
+    "arrow-parens": ["error", "always"],
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*Test.jsx"]}],
   }
 };

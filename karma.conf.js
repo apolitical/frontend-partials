@@ -1,4 +1,3 @@
-const karmaChai = require('karma-chai');
 const karmaCoverage = require('karma-coverage');
 const karmaMocha = require('karma-mocha');
 const karmaNyanReporter = require('karma-nyan-reporter');
@@ -34,7 +33,6 @@ module.exports = (config) => {
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: [
-      'chai',
       'mocha',
     ],
 
@@ -105,7 +103,6 @@ module.exports = (config) => {
     },
 
     plugins: [
-      karmaChai,
       karmaCoverage,
       karmaMocha,
       karmaNyanReporter,

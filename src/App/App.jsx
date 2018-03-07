@@ -1,20 +1,27 @@
+// @flow
 import React from 'react';
 import styled from 'styled-components';
 
 type AppProps = {
-  name: string,
-  onclick: ()=>void,
-  clicked: boolean
+  onClick?: ()=>void,
+  clicked?: boolean,
+  name?: string,
 };
 
-const H1 = styled.h1`
-  color: ${props => props.clicked ? 'pink' : 'black'}
+const Wrapper = styled.div`
+  color: ${(props) => (props.clicked ? 'pink' : 'black')}
 `;
 
-const App = ({ name = 'World', onclick = () => {}, clicked = false} : AppProps) => (
-  <div onClick={onclick} onKeyPress={onclick} role="button" tabIndex="0">
-    <H1 clicked={clicked}>Hello {name}</H1>
-  </div>
+const App = (props : AppProps) => (
+  <Wrapper {...props} onKeyPress={props.onClick} role="button" tabIndex="0">
+    <h1>Hello {props.name}</h1>
+  </Wrapper>
 );
+
+App.defaultProps = {
+  onClick() {},
+  clicked: false,
+  name: 'World',
+};
 
 export default App;

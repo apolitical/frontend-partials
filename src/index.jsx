@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
@@ -15,14 +16,18 @@ const reducers = combineReducers({
 const store = createStore(reducers);
 
 
-render(
+const profileAppElement = document.getElementById('profile-app');
+
+if (profileAppElement instanceof Element) {
+  render(
     <Provider store={store}>
       <BrowserRouter>
         <Switch>
-          <Route path="/:name" component={App}/>
-          <Route path="/" component={App}/>
+          <Route path="/:name" component={App} />
+          <Route path="/" component={App} />
         </Switch>
       </BrowserRouter>
     </Provider>,
-  document.getElementById('profile-app'),
-);
+    profileAppElement,
+  );
+}

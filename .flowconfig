@@ -1,3 +1,6 @@
 [include]
 src/**/*.js
 src/**/*.jsx
+
+[libs]
+flow-typed/mocha.js

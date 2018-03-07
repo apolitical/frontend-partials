@@ -3,5 +3,8 @@
     [ "env", { "targets": { "browsers": ["last 2 versions"] } } ],
     "flow",
     "react"
+  ],
+  "plugins": [
+    ["transform-object-rest-spread", { "useBuiltIns": true }]
   ]
 }

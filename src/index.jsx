@@ -9,7 +9,7 @@ import App from './App/AppContainer';
 import { appReducer } from './App/AppReducer';
 
 const reducers = combineReducers({
-  app: appReducer
+  app: appReducer,
 });
 const store = createStore(reducers);
 
@@ -18,5 +18,5 @@ render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById('profile-app')
+  document.getElementById('profile-app'),
 );

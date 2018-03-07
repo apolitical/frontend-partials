@@ -21,6 +21,8 @@ export const appReducer = (state: AppStateType = initialState, action: ActionTyp
     case CLICKED: {
       return { clicked: !state.clicked };
     }
+    default: {
+      return state;
+    }
   }
-  return state;
 };

@@ -20,6 +20,9 @@ const webpackConfig   = {
   // Dev server specific
   devServer: {
     stats: webpackDefaults.stats,
+    historyApiFallback: {
+      index: '/index.html',
+    },
   },
 
   // What plugins are used in the build process
@@ -36,10 +39,11 @@ const webpackConfig   = {
           { name: 'react', var: 'React', path: `umd/react.${prod ? 'production.min' : 'development'}.js` },
           { name: 'react-dom', var: 'ReactDOM', path: `umd/react-dom.${prod ? 'production.min' : 'development'}.js` },
           { name: 'react-redux', var: 'ReactRedux', path: `dist/react-redux${prod ? '.min' : ''}.js` },
+          { name: 'react-router-dom', var: 'ReactRouterDOM', path: `umd/react-router-dom${prod ? '.min' : ''}.js` },
           { name: 'redux', var: 'Redux', path: `dist/redux${prod ? '.min' : ''}.js` },
         ]
       },
-      publicPath: '/node_modules'
+      publicPath: '../node_modules'
     }),
   ],
 

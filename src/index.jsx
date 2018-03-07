@@ -19,7 +19,6 @@ render(
     <Provider store={store}>
       <BrowserRouter>
         <Switch>
-
           <Route path="/:name" component={App}/>
           <Route path="/" component={App}/>
         </Switch>

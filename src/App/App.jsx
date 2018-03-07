@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 
 type AppProps = {
   name: string,
@@ -6,17 +7,13 @@ type AppProps = {
   clicked: boolean
 };
 
-const clickedStyle = {
-  color: 'pink',
-};
+const H1 = styled.h1`
+  color: ${props => props.clicked ? 'pink' : 'black'}
+`;
 
-const unclickedStyle = {
-  color: 'black',
-};
-
-const App = ({ name = 'World', onclick = () => {}, clicked = false } : AppProps) => (
+const App = ({ name = 'World', onclick = () => {}, clicked = false} : AppProps) => (
   <div onClick={onclick} onKeyPress={onclick} role="button" tabIndex="0">
-    <h1 style={clicked ? clickedStyle : unclickedStyle}>Hello {name}</h1>
+    <H1 clicked={clicked}>Hello {name}</H1>
   </div>
 );
 

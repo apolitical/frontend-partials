@@ -41,6 +41,7 @@ const webpackConfig   = {
           { name: 'react-redux', var: 'ReactRedux', path: `dist/react-redux${prod ? '.min' : ''}.js` },
           { name: 'react-router-dom', var: 'ReactRouterDOM', path: `umd/react-router-dom${prod ? '.min' : ''}.js` },
           { name: 'redux', var: 'Redux', path: `dist/redux${prod ? '.min' : ''}.js` },
+          { name: 'styled-components', var: 'styled', path: `dist/styled-components${prod ? '.min' : ''}.js` },
         ]
       },
       publicPath: '../node_modules'

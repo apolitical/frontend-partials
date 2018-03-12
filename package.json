@@ -22,7 +22,7 @@
     "url": "git+https://github.com/apolitical/profile.git"
   },
   "author": "Daniel Mason <daniel.mason@apolitical.co>",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/apolitical/profile/issues"
   },

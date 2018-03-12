@@ -1,0 +1,8 @@
+{
+  "verbose": false,
+  "ignore": ["node_modules/*"],
+  "ext": "js jsx html",
+  "watch": [
+    "src/"
+  ]
+}

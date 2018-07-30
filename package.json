@@ -4,6 +4,10 @@
   "version": "0.0.0",
   "description": "Profile browser frontend application for Apolitical",
   "main": "index.js",
+  "engines": {
+    "node": "^10.5.0",
+    "npm": "^6.1.0"
+  },
   "scripts": {
     "coverage": "codecov -f coverage/lcov.txt",
     "build": "NODE_ENV=production webpack --config webpack.config.js",

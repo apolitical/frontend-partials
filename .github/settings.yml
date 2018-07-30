@@ -14,37 +14,48 @@ labels:
     color: 19a9b7
   - name: "good first issue :baby_bottle:"
     color: 7057ff
-    oldname: "good first issue"
   - name: "bug :bug:"
     color: ee0701
-    oldname: "bug"
   - name: "duplicate :cat::cat:"
     color: cccccc
-    oldname: "duplicate"    
-  - name: "large :elephant:"
-    color: ff3f0b
-    oldname: "large"
-  - name: "medium :horse:"
-    color: fbca04
-    oldname: "medium"
-  - name: "small :mouse:"
-    color: 0e8a16
-    oldname: "small"
   - name: "enhancement :tada:"
     color: 84b6eb
-    oldname: "enhancement"
   - name: "critical :warning:"
     color: ff0000
-    oldname: "CRITICAL"
   - name: "help wanted :sos:"
     color: 33aa3f
-    oldname: "help wanted"
   - name: "security :key:"
     color: ff69b4
-    oldname: "security"
   - name: "question :grey_question:"
     color: cc317c
-    oldname: "question"
   - name: "wontfix :no_good_woman:"
     color: e6e6e6
-    oldname: "wontfix"
+  - name: "dependent :baby_symbol:"
+    color: f9d0c4
+  - name: "blocked :stop_sign:"
+    color: 006b75
+  - name: "parked :parking:"
+    color: b60205
+  - name: "size 1 :mouse:"
+    color: c9e8fa
+    oldname: "small :mouse:"
+  - name: "size 2 :hamster:"
+    color: 33c5f4
+  - name: "size 3 :rabbit:"
+    color: 1570b6
+  - name: "size 5 :cat:"
+    color: 93c854
+  - name: "size 8 :dog:"
+    color: 005b2f
+    oldname: "medium :horse:"
+  - name: "size 13 :pig:"
+    color: f7ee64
+  - name: "size 25 :cow:"
+    color: f89c21
+  - name: "size 50 :elephant:"
+    color: d81f25
+    oldname: "large :elephant:"
+  - name: "size 100 :dragon:"
+    color: ed3b93
+  - name: "addition :bangbang:"
+    color: f48a11

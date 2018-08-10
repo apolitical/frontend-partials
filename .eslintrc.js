@@ -14,5 +14,6 @@ module.exports = {
   rules: {
     "arrow-parens": ["error", "always"],
     "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*Test.jsx"]}],
+    "react/jsx-one-expression-per-line": "off",
   }
 };

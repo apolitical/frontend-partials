@@ -5,7 +5,7 @@ const webpackDefaults = require('./helpers/webpack.defaults');
 
 const prod = process.env.NODE_ENV !== 'development';
 
-const webpackConfig   = {
+const webpackConfig = {
   ...webpackDefaults,
 
   // Entry point
@@ -35,7 +35,7 @@ const webpackConfig   = {
     new WebpackCdnPlugin({
       prod,
       modules: {
-        'react': [
+        react: [
           { name: 'react', var: 'React', path: `umd/react.${prod ? 'production.min' : 'development'}.js` },
           { name: 'react-dom', var: 'ReactDOM', path: `umd/react-dom.${prod ? 'production.min' : 'development'}.js` },
           { name: 'react-redux', var: 'ReactRedux', path: `dist/react-redux${prod ? '.min' : ''}.js` },
@@ -44,9 +44,11 @@ const webpackConfig   = {
           { name: 'styled-components', var: 'styled', path: `dist/styled-components${prod ? '.min' : ''}.js` },
         ]
       },
-      publicPath: '../node_modules'
+      publicPath: '../node_modules',
     }),
   ],
+
+  mode: prod ? 'production' : 'development',
 
 };
 

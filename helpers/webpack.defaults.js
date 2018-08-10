@@ -14,12 +14,8 @@ module.exports = {
         test: /\.jsx?$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
-        query: {
-          presets: ['es2015', 'react'],
-          plugins: ['istanbul'],
-        }
-      }
-    ]
+      },
+    ],
   },
 
   // What to display when building
@@ -31,4 +27,7 @@ module.exports = {
     performance: true,
     warnings: true,
   },
+
+  // Overwritten in webpack.config.js
+  mode: 'development',
 };

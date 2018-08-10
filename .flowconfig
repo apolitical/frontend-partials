@@ -1,6 +1,12 @@
 [include]
 src/**/*.js
 src/**/*.jsx
+src/*.js
+src/*.jsx
+pages/**/*.js
+pages/**/*.jsx
+pages/*.js
+pages/*.jsx
 
 [libs]
 flow-typed/mocha.js

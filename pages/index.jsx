@@ -1,11 +1,4 @@
-import React from 'react';
+// @flow
+import base from '../src/base';
 
-const Index = () => (
-  <div>
-    <p>
-      Hello Next.js
-    </p>
-  </div>
-);
-
-export default Index;
+export default base;

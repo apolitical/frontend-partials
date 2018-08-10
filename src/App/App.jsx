@@ -9,12 +9,12 @@ type AppProps = {
 };
 
 const Wrapper = styled.div`
-  color: ${(props) => (props.clicked ? 'pink' : 'black')}
+  color: ${({ clicked }) => (clicked ? 'pink' : 'black')}
 `;
 
-const App = (props : AppProps) => (
-  <Wrapper {...props} onKeyPress={props.onClick} role="button" tabIndex="0">
-    <h1>Hello {props.name}</h1>
+const App = ({ onClick, clicked, name } : AppProps) => (
+  <Wrapper clicked={clicked} onClick={onClick} onKeyPress={onClick} role="button" tabIndex="0">
+    <h1>Hello {name}</h1>
   </Wrapper>
 );
 

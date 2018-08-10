@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { combineReducers, createStore } from 'redux';
 import { Provider } from 'react-redux';
 
-import 'babel-polyfill';
+import '@babel/polyfill';
 
 import App from './App/AppContainer';
 import { appReducer } from './App/AppReducer';

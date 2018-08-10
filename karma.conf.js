@@ -1,9 +1,13 @@
+const karmaChrome = require('karma-chrome-launcher');
 const karmaCoverage = require('karma-coverage');
 const karmaMocha = require('karma-mocha');
 const karmaNyanReporter = require('karma-nyan-reporter');
-const karmaPhantomJsLauncher = require('karma-phantomjs-launcher');
 const karmaWebpack = require('karma-webpack');
 const webpack = require('./helpers/webpack.defaults');
+
+// This is needed to launch chromium
+const puppeteer = require('puppeteer');
+process.env.CHROME_BIN = puppeteer.executablePath();
 
 const filesToTest = [ 'karma.test.js' ];
 
@@ -17,7 +21,7 @@ const filesToProcess = [
 
 const preprocessorMap = (prev, cur) => ({
   ...prev,
-  [cur]: ['webpack']
+  [cur]: ['webpack'],
 });
 
 const preprocessors = filesToProcess.reduce(preprocessorMap, {});
@@ -71,7 +75,9 @@ module.exports = (config) => {
 
 
     // level of logging
-    // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
+    // possible values:
+    //   config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN
+    //   || config.LOG_INFO || config.LOG_DEBUG
     logLevel: config.LOG_INFO,
 
 
@@ -81,10 +87,7 @@ module.exports = (config) => {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: [
-      'PhantomJS'
-    ],
-
+    browsers: ['ChromeHeadless'],
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
@@ -103,10 +106,10 @@ module.exports = (config) => {
     },
 
     plugins: [
+      karmaChrome,
       karmaCoverage,
       karmaMocha,
       karmaNyanReporter,
-      karmaPhantomJsLauncher,
       karmaWebpack,
     ],
   });

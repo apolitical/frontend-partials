@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/apolitical/profile#readme",
   "dependencies": {
-    "@babel/core": "^7.0.0-rc.1",
+    "@babel/core": "^7.0.0-rc.2",
     "@babel/plugin-proposal-class-properties": "^7.0.0-rc.1",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0-rc.1",
     "@babel/polyfill": "^7.0.0-rc.1",

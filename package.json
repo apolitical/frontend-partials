@@ -1,12 +1,12 @@
 {
-  "name": "profile",
+  "name": "frontend-skeleton",
   "private": true,
   "version": "0.0.0",
-  "description": "Profile browser frontend application for Apolitical",
+  "description": "Skeleton frontend application for Apolitical",
   "main": "index.js",
   "engines": {
-    "node": "^10.5.0",
-    "npm": "^6.1.0"
+    "node": "^10.11.0",
+    "npm": "^6.4.1"
   },
   "scripts": {
     "coverage": "codecov -f coverage/lcov.txt",

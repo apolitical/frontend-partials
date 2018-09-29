@@ -1,7 +1,7 @@
 cache_key: &cache_key deps-{{ checksum "package-lock.json" }}
 job_defaults: &job_defaults
   docker:
-  - image: circleci/node:10.5.0
+  - image: circleci/node:10.11.0
   working_directory: ~/repo
 
 version: 2

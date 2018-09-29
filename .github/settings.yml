@@ -34,8 +34,6 @@ labels:
     color: f9d0c4
   - name: "blocked :stop_sign:"
     color: 006b75
-  - name: "parked :parking:"
-    color: b60205
   - name: "size 1 :mouse:"
     color: c9e8fa
     oldname: "small :mouse:"
@@ -59,3 +57,7 @@ labels:
     color: ed3b93
   - name: "addition :bangbang:"
     color: f48a11
+  - name: "refactor :construction:"
+    color: 0e8a16
+  - name: "design :art:"
+    color: f4cd1f

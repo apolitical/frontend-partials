@@ -1,12 +1,12 @@
 {
-  "name": "profile",
+  "name": "frontend-skeleton",
   "private": true,
   "version": "0.0.0",
-  "description": "Profile browser frontend application for Apolitical",
+  "description": "Skeleton frontend application for Apolitical",
   "main": "index.js",
   "engines": {
-    "node": "^10.5.0",
-    "npm": "^6.1.0"
+    "node": "^10.11.0",
+    "npm": "^6.4.1"
   },
   "scripts": {
     "coverage": "codecov -f coverage/lcov.txt",
@@ -19,7 +19,8 @@
     "start:flow": "nodemon --exec 'npm run flow || true'",
     "start:lint": "nodemon --exec 'npm run lint || true'",
     "start:test": "nodemon --exec 'npm run test || true'",
-    "test": "NODE_ENV=test karma start --single-run"
+    "test": "NODE_ENV=test karma start --single-run",
+    "audit": "npm-audit-ci -h"
   },
   "repository": {
     "type": "git",
@@ -72,6 +73,7 @@
     "karma-webpack": "^4.0.0-rc.2",
     "mocha": "^5.2.0",
     "nodemon": "^1.18.4",
+    "npm-audit-ci": "^1.0.1",
     "nyc": "^13.0.1",
     "puppeteer": "^1.8.0",
     "sinon": "^6.3.4",

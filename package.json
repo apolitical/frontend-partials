@@ -41,7 +41,7 @@
     "@babel/preset-flow": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "isomorphic-fetch": "^2.2.1",
-    "react": "^16.5.2",
+    "react": "^16.6.0",
     "react-dom": "^16.6.0",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",

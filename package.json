@@ -72,7 +72,7 @@
     "karma-nyan-reporter": "^0.2.5",
     "karma-webpack": "^4.0.0-rc.3",
     "mocha": "^5.2.0",
-    "nodemon": "1.18.4",
+    "nodemon": "^1.18.7",
     "npm-audit-ci": "^1.0.1",
     "nyc": "^13.1.0",
     "puppeteer": "^1.10.0",

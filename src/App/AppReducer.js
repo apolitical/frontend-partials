@@ -18,7 +18,7 @@ const initialState: AppStateType = {
 
 export const appReducer = (
   state: AppStateType = initialState,
-  action: ActionType
+  action: ActionType,
 ) : AppStateType => {
   switch (action.type) {
     case CLICKED: {

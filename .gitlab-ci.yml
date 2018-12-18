@@ -1,0 +1,197 @@
+#########
+# Reuse #
+#########
+variables:
+  RUNNER_IMAGE: $CI_REGISTRY_IMAGE/builder:$CI_PIPELINE_ID
+  ARTIFACT_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG
+  GITLAB_REGISTRY_SECRET: gitlab-registry-frontend-skeleton
+
+.deploy-beta: &deploy-beta
+  only:
+    - tags
+
+.deploy-rc: &deploy-rc
+  only:
+    - /^v\d+\.\d+\.\d+-rc/
+    - /^v\d+\.\d+\.\d+$/
+
+.deploy-live: &deploy-live
+  only:
+    - /^v\d+\.\d+\.\d+$/
+
+##########
+# Stages #
+##########
+
+stages:
+  - Pre-flight  # Quick fail tests, eg, is the version tagged correctly
+  - Prepare     # Prepare the tools we'll need for the rest of the pipeline
+  - Quality     # Quality checks, unit tests, lints, etc
+  - Build       # If tagged: Build the docker image and put it in the registry
+  - E2E         # Test final the image actually works as expected
+  - Deploy      # Deploy working artifacts to the appropriate environment
+
+##############
+# Pre-flight #
+##############
+.pre-flight: &pre-flight-job
+  stage: Pre-flight
+  image: alpine
+
+Beta k8s config:
+  <<: *pre-flight-job
+  <<: *deploy-beta
+  script:
+    - "grep -rE \"^[[:space:]]+image: ${ARTIFACT_IMAGE}$\" k8s/beta" # type coercion
+
+Rc k8s config:
+  <<: *pre-flight-job
+  <<: *deploy-rc
+  script:
+    - "grep -rE \"^[[:space:]]+image: ${ARTIFACT_IMAGE}$\" k8s/rc" # type coercion
+
+Live k8s config:
+  <<: *pre-flight-job
+  <<: *deploy-live
+  script:
+    - "grep -rE \"^[[:space:]]+image: ${ARTIFACT_IMAGE}$\" k8s/live" # type coercion
+
+###########
+# Prepare #
+###########
+Build Runner:
+  stage: Prepare
+  image: docker:stable
+  services:
+    - docker:dind
+  variables:
+    DOCKER_HOST: tcp://localhost:2375
+    DOCKER_DRIVER: overlay2
+  before_script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  script:
+    - docker build . -f .gitlab-ci/runner/Dockerfile -t $RUNNER_IMAGE
+    - docker push $RUNNER_IMAGE
+
+###########
+# Quality #
+###########
+.quality:
+  stage: Quality
+  image:  $RUNNER_IMAGE
+  before_script:
+    - cp -r /app/node_modules .
+
+Unit test:
+  extends: .quality
+  script:
+    - npm test
+
+Lint:
+  extends: .quality
+  script:
+    - npm run lint
+
+Flow:
+  extends: .quality
+  script:
+    - npm run flow
+
+Audit:
+  extends: .quality
+  allow_failure: true
+  script:
+    - npm audit
+
+Dependencies:
+  extends: .quality
+  allow_failure: true
+  script:
+    - npm outdated
+
+#########
+# Build #
+#########
+Docker Image:
+  stage: Build
+  only:
+    - tags
+  image: docker:stable
+  services:
+    - docker:dind
+  variables:
+    DOCKER_HOST: tcp://localhost:2375
+    DOCKER_DRIVER: overlay2
+  before_script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  script:
+    - docker build . -t $ARTIFACT_IMAGE
+    - docker push $ARTIFACT_IMAGE
+
+#######
+# E2E #
+#######
+End To End:
+  stage: E2E
+  allow_failure: true
+  services:
+    - mysql
+  before_script:
+    - echo CONFIGURE ENVIRONMENT
+  script:
+    - echo ADD END TO END TESTS HERE
+    - "false"
+
+##########
+# Deploy #
+##########
+.deploy: &deploy-job
+  stage: Deploy
+  image: registry.gitlab.com/apolitical/deployer
+  except:
+    - branches
+  when: manual
+
+Beta:
+  <<: *deploy-job
+  <<: *deploy-beta
+  environment:
+    name: beta
+    url: https://beta.apolitical.co/frontend-skeleton
+  script:
+    - echo $GKE_SERVICE_ACCOUNT_KEYFILE | gcloud auth activate-service-account --key-file -
+    - gcloud config set project hazel-tea-194609
+    - gcloud container clusters get-credentials beta-eu-west-1c --zone europe-west1-c
+    - kubectl delete secret $GITLAB_REGISTRY_SECRET --namespace=public --ignore-not-found=true
+    - kubectl create secret docker-registry $GITLAB_REGISTRY_SECRET --docker-server=registry.gitlab.com --docker-username=$CI_DEPLOY_USER --docker-password=$CI_DEPLOY_PASSWORD --docker-email=engineering@apolitical.co --namespace=public
+    - kubectl apply -f k8s/beta
+
+# Release Candidate:
+#   <<: *deploy-job
+#   <<: *deploy-rc
+#   environment:
+#     name: rc
+#     url: https://rc.apolitical.co/frontend-skeleton
+#   when: on_success
+#   script:
+#     - echo $GKE_SERVICE_ACCOUNT_KEYFILE | gcloud auth activate-service-account --key-file -
+#     - gcloud config set project hazel-tea-194609
+#     - gcloud container clusters get-credentials rc-eu-west1-d --zone europe-west1-d
+#     - kubectl delete secret $GITLAB_REGISTRY_SECRET --namespace=public --ignore-not-found=true
+#     - kubectl create secret docker-registry $GITLAB_REGISTRY_SECRET --docker-server=registry.gitlab.com --docker-username=$CI_DEPLOY_USER --docker-password=$CI_DEPLOY_PASSWORD --docker-email=engineering@apolitical.co --namespace=public
+#     - kubectl apply -f k8s/rc
+#
+# Live:
+#   <<: *deploy-job
+#   <<: *deploy-live
+#   environment:
+#     name: live
+#     url: https://apolitical.co/frontend-skeleton
+#   extends: .deploy
+#   script:
+#     - echo $GKE_SERVICE_ACCOUNT_KEYFILE | gcloud auth activate-service-account --key-file -
+#     - gcloud config set project hazel-tea-194609
+#     - gcloud container clusters get-credentials live-eu-west1-c --zone europe-west1-c
+#     - kubectl delete secret $GITLAB_REGISTRY_SECRET --namespace=public --ignore-not-found=true
+#     - kubectl create secret docker-registry $GITLAB_REGISTRY_SECRET --docker-server=registry.gitlab.com --docker-username=$CI_DEPLOY_USER --docker-password=$CI_DEPLOY_PASSWORD --docker-email=engineering@apolitical.co --namespace=public
+#     - kubectl apply -f k8s/live

@@ -14,7 +14,11 @@ const Wrapper = styled.div`
 
 const App = ({ onClick, clicked, name } : AppProps) => (
   <Wrapper clicked={clicked} onClick={onClick} onKeyPress={onClick} role="button" tabIndex="0">
-    <h1>Hello {name}</h1>
+    <h1>
+      Hello
+      {' '}
+      {name}
+    </h1>
   </Wrapper>
 );
 

@@ -1,0 +1,49 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: frontend-skeleton
+  namespace: public
+  labels:
+    k8s-app: frontend-skeleton
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      k8s-app: frontend-skeleton
+  template:
+    metadata:
+      labels:
+        k8s-app: frontend-skeleton
+    spec:
+      containers:
+      - name: frontend-skeleton
+        image: registry.gitlab.com/apolitical/frontend-skeleton:v1.0.0
+        imagePullPolicy: "IfNotPresent"
+        ports:
+        - containerPort: 80
+        env:
+        - name: GOOGLE_TAG_MANAGER_ID
+          valueFrom:
+            secretKeyRef:
+              name: google-tag-manager-id
+              key: GOOGLE_TAG_MANAGER_ID
+      imagePullSecrets:
+      - name: gitlab-registry-frontend-skeleton
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-skeleton
+  namespace: public
+  labels:
+    k8s-app: frontend-skeleton
+spec:
+  selector:
+    k8s-app: frontend-skeleton
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  type: NodePort

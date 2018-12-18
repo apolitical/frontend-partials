@@ -1,12 +1,19 @@
 [include]
 src/**/*.js
 src/**/*.jsx
-src/*.js
-src/*.jsx
-pages/**/*.js
-pages/**/*.jsx
-pages/*.js
-pages/*.jsx
+
+[ignore]
+node_modules/styled-components/.*
+karma.conf.js
+karma.test.js
+webpack.config.js
+.*/findup/.*
 
 [libs]
-flow-typed/mocha.js
+flow-typed/**/*.js
+
+[lints]
+
+[options]
+
+[strict]

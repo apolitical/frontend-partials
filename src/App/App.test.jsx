@@ -1,20 +1,18 @@
 // @flow
 import React from 'react';
 import { mount } from 'enzyme';
-import { spy } from 'sinon';
-import { expect } from 'chai';
 
 import App from './App';
 
 describe('App', () => {
   it('should default to "Hello World"', () => {
     const app = mount(<App />);
-    expect(app.text()).to.equal('Hello World');
+    expect(app.text()).toEqual('Hello World');
   });
 
   it('should accept a name', () => {
     const app = mount(<App name="Apolitical" />);
-    expect(app.text()).to.equal('Hello Apolitical');
+    expect(app.text()).toEqual('Hello Apolitical');
   });
 
   it('should be clickable', () => {
@@ -23,9 +21,9 @@ describe('App', () => {
   });
 
   it('should have a customisable onclick', () => {
-    const callback = spy();
+    const callback = jest.fn();
     const app = mount(<App onClick={callback} />);
     app.simulate('click');
-    callback.should.have.callCount(1);
+    expect(callback.mock.calls.length).toBe(1);
   });
 });

@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: frontend-skeleton
-        image: registry.gitlab.com/apolitical/frontend-skeleton:deploy-test.2
+        image: registry.gitlab.com/apolitical/frontend-skeleton:deploy-test.3
         imagePullPolicy: "IfNotPresent"
         ports:
         - containerPort: 80

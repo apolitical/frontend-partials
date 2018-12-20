@@ -30,7 +30,7 @@ const webpackConfig = {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: __dirname + '/src/index.html',
-      title: 'Apolitical Profiles',
+      title: 'Apolitical',
     }),
     new WebpackCdnPlugin({
       prod,

@@ -169,6 +169,7 @@ Beta:
     - kubectl delete secret $GITLAB_REGISTRY_SECRET --namespace=public --ignore-not-found=true
     - kubectl create secret docker-registry $GITLAB_REGISTRY_SECRET --docker-server=registry.gitlab.com --docker-username=$CI_DEPLOY_USER --docker-password=$CI_DEPLOY_PASSWORD --docker-email=engineering@apolitical.co --namespace=public
     - kubectl apply -f k8s/beta
+    - kubectl -n public rollout status deployment/frontend-skeleton
 
 # Release Candidate:
 #   <<: *deploy-job

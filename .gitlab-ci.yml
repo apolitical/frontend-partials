@@ -14,11 +14,15 @@ variables:
   only:
     - /^v\d+\.\d+\.\d+-rc/
     - /^v\d+\.\d+\.\d+$/
-
+  except:
+    - branches
+ 
 .deploy-live: &deploy-live
   only:
     - /^v\d+\.\d+\.\d+$/
-
+  except:
+    - branches
+ 
 ##########
 # Stages #
 ##########

@@ -14,8 +14,9 @@ const webpackConfig = {
 
   // All options relating to where files go when they're built
   output: {
-    path: __dirname + '/dist',
+    path: `${__dirname}/dist/frontend-skeleton`,
     filename: 'index.js',
+    publicPath: '/frontend-skeleton',
   },
 
   // Dev server specific

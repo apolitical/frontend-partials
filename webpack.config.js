@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackCdnPlugin = require('webpack-cdn-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const webpackDefaults = require('./helpers/webpack.defaults');
 
@@ -54,6 +55,20 @@ const webpackConfig = {
 
 if (!prod) {
   webpackConfig.devtool = 'eval';
+}
+if (prod) {
+  webpackConfig.optimization = {
+    minimizer: [
+      new UglifyJsPlugin({
+        uglifyOptions: {
+          compress: {
+            warnings: false,
+            drop_console: true,
+          },
+        },
+      }),
+    ],
+  };
 }
 
 module.exports = webpackConfig  ;

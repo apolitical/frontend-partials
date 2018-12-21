@@ -22,7 +22,19 @@ const webpackConfig = {
   devServer: {
     stats: webpackDefaults.stats,
     historyApiFallback: {
-      index: '/index.html',
+      index: '/frontend-skeleton/index.html',
+    },
+    proxy: {
+      '/api/members': {
+        target: 'http://localhost:3000',
+        pathRewrite: { '^/api/members': '' },
+        secure: false,
+      },
+      '/api/tests': {
+        target: 'http://localhost:3131',
+        pathRewrite: { '^/api/tests': '' },
+        secure: false,
+      },
     },
   },
 
@@ -49,6 +61,7 @@ const webpackConfig = {
     }),
   ],
 
+  devtool: 'source-map',
   mode: prod ? 'production' : 'development',
 
 };

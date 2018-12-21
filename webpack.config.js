@@ -42,7 +42,7 @@ const webpackConfig = {
   plugins: [
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: __dirname + '/src/index.html',
+      template: `${__dirname}/src/index.html`,
       title: 'Apolitical',
     }),
     new WebpackCdnPlugin({
@@ -55,7 +55,7 @@ const webpackConfig = {
           { name: 'react-router-dom', var: 'ReactRouterDOM', path: `umd/react-router-dom${prod ? '.min' : ''}.js` },
           { name: 'redux', var: 'Redux', path: `dist/redux${prod ? '.min' : ''}.js` },
           { name: 'styled-components', var: 'styled', path: `dist/styled-components${prod ? '.min' : ''}.js` },
-        ]
+        ],
       },
       publicPath: '../node_modules',
     }),
@@ -84,4 +84,4 @@ if (prod) {
   };
 }
 
-module.exports = webpackConfig  ;
+module.exports = webpackConfig;

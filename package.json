@@ -24,14 +24,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/apolitical/profile.git"
+    "url": "git+https://github.com/apolitical/frontend-skeleton.git"
   },
   "author": "Daniel Mason <daniel.mason@apolitical.co>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/apolitical/profile/issues"
+    "url": "https://github.com/apolitical/frontend-skeleton/issues"
   },
-  "homepage": "https://github.com/apolitical/profile#readme",
+  "homepage": "https://github.com/apolitical/frontend-skeleton#readme",
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
     "core-decorators": "^0.20.0",

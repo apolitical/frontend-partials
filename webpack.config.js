@@ -44,7 +44,7 @@ const webpackConfig = {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: `${__dirname}/src/index.html`,
-      title: 'Apolitical',
+      title: 'React Application',
     }),
     new WebpackCdnPlugin({
       prod,

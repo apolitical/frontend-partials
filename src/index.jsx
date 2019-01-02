@@ -4,11 +4,11 @@ import base from './base';
 
 import '@babel/polyfill';
 
-const profileAppElement = document.getElementById('profile-app');
+const reactAppElement = document.getElementById('react-app');
 
-if (profileAppElement instanceof Element) {
+if (reactAppElement instanceof Element) {
   render(
     base(),
-    profileAppElement,
+    reactAppElement,
   );
 }

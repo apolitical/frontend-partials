@@ -1,7 +1,7 @@
 {
   "name": "frontend-skeleton",
   "private": true,
-  "version": "1.0.0-deploy-test.6.0",
+  "version": "0.0.0",
   "description": "Skeleton frontend application for Apolitical",
   "main": "index.js",
   "engines": {

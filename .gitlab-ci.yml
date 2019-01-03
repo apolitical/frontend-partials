@@ -6,18 +6,43 @@ variables:
   ARTIFACT_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG
   GITLAB_REGISTRY_SECRET: gitlab-registry-frontend-skeleton
 
+.deployment: &deployment
+  image: registry.gitlab.com/apolitical/deployer
+  when: manual
+  allow_failure: false
+  variables:
+    cluster: override-me
+    zone: override-me
+    ENVIRONMENT: override-me
+  script:
+    # Some steps only run if the variable ACTUALLY_DEPLOY is set, needs to be a string
+    # The deployment itself will have --dry-run added to it if we're not doing an actual deploy
+    - echo $GKE_SERVICE_ACCOUNT_KEYFILE | gcloud auth activate-service-account --key-file -
+    - gcloud config set project hazel-tea-194609
+    - gcloud container clusters get-credentials $CLUSTER --zone $ZONE
+    - "[[ -z ${ACTUALLY_DEPLOY+test} ]] || kubectl delete secret --namespace=internal $GITLAB_REGISTRY_SECRET --ignore-not-found=true"
+    - "[[ -z ${ACTUALLY_DEPLOY+test} ]] || kubectl create secret --namespace=internal docker-registry $GITLAB_REGISTRY_SECRET --docker-server=registry.gitlab.com --docker-username=$CI_DEPLOY_USER --docker-password=$CI_DEPLOY_PASSWORD --docker-email=engineering@apolitical.co"
+    - kubectl apply ${ACTUALLY_DEPLOY---dry-run} -f k8s/$ENVIRONMENT
+    - "[[ -z ${ACTUALLY_DEPLOY+test} ]] || kubectl -n internal rollout status deployment/lms-adapt"
+    - "[[ -z ${ACTUALLY_DEPLOY+test} ]] || kubectl -n internal rollout status deployment/lms-mongo"
+
 .deploy-beta: &deploy-beta
+  <<: *deployment
   only:
     - tags
+  except:
+    - branches
 
 .deploy-rc: &deploy-rc
+  <<: *deployment
   only:
     - /^v\d+\.\d+\.\d+-rc/
     - /^v\d+\.\d+\.\d+$/
   except:
     - branches
- 
+
 .deploy-live: &deploy-live
+  <<: *deployment
   only:
     - /^v\d+\.\d+\.\d+$/
   except:
@@ -40,25 +65,35 @@ stages:
 ##############
 .pre-flight: &pre-flight-job
   stage: Pre-flight
-  image: alpine
+  before_script:
+    - "grep -rE \"^[[:space:]]+image: ${ARTIFACT_IMAGE}$\" k8s/beta" # type coercion
 
 Beta k8s config:
   <<: *pre-flight-job
   <<: *deploy-beta
-  script:
-    - "grep -rE \"^[[:space:]]+image: ${ARTIFACT_IMAGE}$\" k8s/beta" # type coercion
+  when: always
+  variables:
+    CLUSTER: beta-eu-west-1c
+    ZONE: europe-west1-c
+    ENVIRONMENT: beta
 
 Rc k8s config:
   <<: *pre-flight-job
   <<: *deploy-rc
-  script:
-    - "grep -rE \"^[[:space:]]+image: ${ARTIFACT_IMAGE}$\" k8s/rc" # type coercion
+  when: always
+  variables:
+    CLUSTER: rc-eu-west1-d
+    ZONE: europe-west1-d
+    ENVIRONMENT: rc
 
 Live k8s config:
   <<: *pre-flight-job
   <<: *deploy-live
-  script:
-    - "grep -rE \"^[[:space:]]+image: ${ARTIFACT_IMAGE}$\" k8s/live" # type coercion
+  when: always
+  variables:
+    CLUSTER: live-eu-west1-c
+    ZONE: europe-west1-c
+    ENVIRONMENT: live
 
 ###########
 # Prepare #
@@ -80,35 +115,35 @@ Build Runner:
 ###########
 # Quality #
 ###########
-.quality:
+.quality: &quality
   stage: Quality
   image:  $RUNNER_IMAGE
   before_script:
     - cp -r /app/node_modules .
 
 Unit test:
-  extends: .quality
+  <<: *quality
   script:
     - npm test
 
 Lint:
-  extends: .quality
+  <<: *quality
   script:
     - npm run lint
 
 Flow:
-  extends: .quality
+  <<: *quality
   script:
     - npm run flow
 
 Audit:
-  extends: .quality
+  <<: *quality
   allow_failure: true
   script:
     - npm audit
 
 Dependencies:
-  extends: .quality
+  <<: *quality
   allow_failure: true
   script:
     - npm outdated
@@ -152,8 +187,6 @@ End To End:
 .deploy: &deploy-job
   stage: Deploy
   image: registry.gitlab.com/apolitical/deployer
-  except:
-    - branches
   when: manual
 
 Beta:
@@ -162,43 +195,34 @@ Beta:
   environment:
     name: beta
     url: https://beta.apolitical.co/frontend-skeleton
-  script:
-    - echo $GKE_SERVICE_ACCOUNT_KEYFILE | gcloud auth activate-service-account --key-file -
-    - gcloud config set project hazel-tea-194609
-    - gcloud container clusters get-credentials beta-eu-west-1c --zone europe-west1-c
-    - kubectl delete secret $GITLAB_REGISTRY_SECRET --namespace=public --ignore-not-found=true
-    - kubectl create secret docker-registry $GITLAB_REGISTRY_SECRET --docker-server=registry.gitlab.com --docker-username=$CI_DEPLOY_USER --docker-password=$CI_DEPLOY_PASSWORD --docker-email=engineering@apolitical.co --namespace=public
-    - kubectl apply -f k8s/beta
-    - kubectl -n public rollout status deployment/frontend-skeleton
+  variables:
+    CLUSTER: beta-eu-west-1c
+    ZONE: europe-west1-c
+    ENVIRONMENT: beta
+    ACTUALLY_DEPLOY: "" # Must be an empty string
 
-# Release Candidate:
-#   <<: *deploy-job
-#   <<: *deploy-rc
-#   environment:
-#     name: rc
-#     url: https://rc.apolitical.co/frontend-skeleton
-#   when: on_success
-#   script:
-#     - echo $GKE_SERVICE_ACCOUNT_KEYFILE | gcloud auth activate-service-account --key-file -
-#     - gcloud config set project hazel-tea-194609
-#     - gcloud container clusters get-credentials rc-eu-west1-d --zone europe-west1-d
-#     - kubectl delete secret $GITLAB_REGISTRY_SECRET --namespace=public --ignore-not-found=true
-#     - kubectl create secret docker-registry $GITLAB_REGISTRY_SECRET --docker-server=registry.gitlab.com --docker-username=$CI_DEPLOY_USER --docker-password=$CI_DEPLOY_PASSWORD --docker-email=engineering@apolitical.co --namespace=public
-#     - kubectl apply -f k8s/rc
-#     - kubectl -n public rollout status deployment/frontend-skeleton
-#
-# Live:
-#   <<: *deploy-job
-#   <<: *deploy-live
-#   environment:
-#     name: live
-#     url: https://apolitical.co/frontend-skeleton
-#   extends: .deploy
-#   script:
-#     - echo $GKE_SERVICE_ACCOUNT_KEYFILE | gcloud auth activate-service-account --key-file -
-#     - gcloud config set project hazel-tea-194609
-#     - gcloud container clusters get-credentials live-eu-west1-c --zone europe-west1-c
-#     - kubectl delete secret $GITLAB_REGISTRY_SECRET --namespace=public --ignore-not-found=true
-#     - kubectl create secret docker-registry $GITLAB_REGISTRY_SECRET --docker-server=registry.gitlab.com --docker-username=$CI_DEPLOY_USER --docker-password=$CI_DEPLOY_PASSWORD --docker-email=engineering@apolitical.co --namespace=public
-#     - kubectl apply -f k8s/live
-#     - kubectl -n public rollout status deployment/frontend-skeleton
+#Release Candidate:
+#  <<: *deploy-job
+#  <<: *deploy-rc
+#  when: always
+#  environment:
+#    name: rc
+#    url: https://rc.apolitical.co/frontend-skeleton
+#  variables:
+#    CLUSTER: rc-eu-west1-d
+#    ZONE: europe-west1-d
+#    ENVIRONMENT: rc
+#    ACTUALLY_DEPLOY: "" # Must be an empty string
+
+
+#Live:
+#  <<: *deploy-job
+#  <<: *deploy-live
+#  environment:
+#    name: live
+#    url: https://apolitical.co/frontend-skeleton
+#  variables:
+#    CLUSTER: live-eu-west1-c
+#    ZONE: europe-west1-c
+#    ENVIRONMENT: live
+#    ACTUALLY_DEPLOY: "" # Must be an empty string

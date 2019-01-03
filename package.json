@@ -1,7 +1,7 @@
 {
   "name": "frontend-skeleton",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0-deploy-test.6.0",
   "description": "Skeleton frontend application for Apolitical",
   "main": "index.js",
   "engines": {
@@ -21,8 +21,8 @@
     "start:test": "nodemon --exec 'npm run test || true'",
     "test": "jest --coverage",
     "audit": "npm-audit-ci -h",
-    "preversion": "npm test && npm run lint && npm run flow",
-    "version": "npm run build && node version-bump",
+    "preversion": "npm test && npm run lint && npm run flow && node version-bump && git add k8s",
+    "version": "npm run build",
     "postversion": "git push && git push --tags"
   },
   "repository": {

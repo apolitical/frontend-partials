@@ -1,7 +1,7 @@
 {
   "name": "frontend-skeleton",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.1.0-beta.1.0",
   "description": "Skeleton frontend application for Apolitical",
   "main": "index.js",
   "engines": {

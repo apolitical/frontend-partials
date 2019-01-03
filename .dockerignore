@@ -1,0 +1,7 @@
+.circleci
+.github
+.idea
+coverage
+dist
+k8s
+node_modules

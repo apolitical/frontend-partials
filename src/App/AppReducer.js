@@ -16,7 +16,10 @@ const initialState: AppStateType = {
   clicked: false,
 };
 
-export const appReducer = (state: AppStateType = initialState, action: ActionType) : AppStateType => {
+export const appReducer = (
+  state: AppStateType = initialState,
+  action: ActionType,
+) : AppStateType => {
   switch (action.type) {
     case CLICKED: {
       return { clicked: !state.clicked };

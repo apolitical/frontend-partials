@@ -14,6 +14,13 @@ Either
 - Fork
 - Clone, then push to new repo
 
+Versioning
+----------
+
+Use `npm version` to edit the version number. Either:
+- `npm version major|minor|patch` for a full release or
+- `npm version premajor|preminor|prepatch --preid=meta.data.here` for a pre-release
+
 Contributing
 ------------
 

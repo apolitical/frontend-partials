@@ -1,0 +1,18 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: frontend-skeleton
+  namespace: public
+  labels:
+    k8s-app: frontend-skeleton
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /frontend-skeleton
+        backend:
+          serviceName: frontend-skeleton
+          servicePort: 80

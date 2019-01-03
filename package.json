@@ -20,7 +20,10 @@
     "start:lint": "nodemon --exec 'npm run lint || true'",
     "start:test": "nodemon --exec 'npm run test || true'",
     "test": "jest --coverage",
-    "audit": "npm-audit-ci -h"
+    "audit": "npm-audit-ci -h",
+    "preversion": "npm test && npm run lint && npm run flow",
+    "version": "npm run build && node version-bump",
+    "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",

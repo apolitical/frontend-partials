@@ -142,6 +142,11 @@ Audit:
   script:
     - npm audit
 
+Build Dry Run:
+  <<: *quality
+  script:
+    - npm run build
+
 Dependencies:
   <<: *quality
   allow_failure: true

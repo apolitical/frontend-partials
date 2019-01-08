@@ -1,9 +1,8 @@
 {
-  "name": "frontend-skeleton",
+  "name": "frontend-partials",
   "private": true,
-  "version": "1.1.0-beta.1.0",
-  "description": "Skeleton frontend application for Apolitical",
-  "main": "index.js",
+  "version": "0.0.0-beta.1",
+  "description": "Frontend Partials for use in non react applications",
   "engines": {
     "node": "^10.11.0",
     "npm": "^6.4.1"
@@ -27,17 +26,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/apolitical/frontend-skeleton.git"
+    "url": "git+https://github.com/apolitical/frontend-partials.git"
   },
   "author": "Daniel Mason <daniel.mason@apolitical.co>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/apolitical/frontend-skeleton/issues"
+    "url": "https://github.com/apolitical/frontend-partials/issues"
   },
-  "homepage": "https://github.com/apolitical/frontend-skeleton#readme",
+  "homepage": "https://github.com/apolitical/frontend-partials#readme",
   "dependencies": {
+    "@apolitical/styleguide": "^3.1.5",
     "@babel/polyfill": "^7.2.5",
     "core-decorators": "^0.20.0",
+    "deep-freeze": "0.0.1",
     "isomorphic-fetch": "^2.2.1",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
@@ -45,6 +46,7 @@
     "react-router-dom": "^4.3.1",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.7",
+    "redux-saga": "^0.16.2",
     "styled-components": "^4.1.3"
   },
   "devDependencies": {

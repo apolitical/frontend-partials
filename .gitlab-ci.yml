@@ -4,7 +4,7 @@
 variables:
   RUNNER_IMAGE: $CI_REGISTRY_IMAGE/builder:$CI_PIPELINE_ID
   ARTIFACT_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG
-  GITLAB_REGISTRY_SECRET: gitlab-registry-frontend-skeleton
+  GITLAB_REGISTRY_SECRET: gitlab-registry-frontend-partials
 
 .deployment: &deployment
   image: registry.gitlab.com/apolitical/deployer
@@ -194,7 +194,7 @@ Beta:
   <<: *deploy-beta
   environment:
     name: beta
-    url: https://beta.apolitical.co/frontend-skeleton
+    url: https://beta.apolitical.co/frontend-partials
   variables:
     CLUSTER: beta-eu-west-1c
     ZONE: europe-west1-c
@@ -207,7 +207,7 @@ Beta:
 #  when: always
 #  environment:
 #    name: rc
-#    url: https://rc.apolitical.co/frontend-skeleton
+#    url: https://rc.apolitical.co/frontend-partials
 #  variables:
 #    CLUSTER: rc-eu-west1-d
 #    ZONE: europe-west1-d
@@ -220,7 +220,7 @@ Beta:
 #  <<: *deploy-live
 #  environment:
 #    name: live
-#    url: https://apolitical.co/frontend-skeleton
+#    url: https://apolitical.co/frontend-partials
 #  variables:
 #    CLUSTER: live-eu-west1-c
 #    ZONE: europe-west1-c

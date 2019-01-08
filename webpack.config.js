@@ -10,20 +10,20 @@ const webpackConfig = {
   ...webpackDefaults,
 
   // Entry point
-  entry: './src/index.jsx',
+  entry: './src/HeaderApp.jsx',
 
   // All options relating to where files go when they're built
   output: {
-    path: `${__dirname}/dist/frontend-skeleton`,
-    filename: 'index.js',
-    publicPath: '/frontend-skeleton',
+    path: `${__dirname}/dist/frontend-partials`,
+    filename: 'header-app.js',
+    publicPath: '/frontend-partials',
   },
 
   // Dev server specific
   devServer: {
     stats: webpackDefaults.stats,
     historyApiFallback: {
-      index: '/frontend-skeleton/index.html',
+      index: '/frontend-partials/index.html',
     },
     proxy: {
       '/api/members': {

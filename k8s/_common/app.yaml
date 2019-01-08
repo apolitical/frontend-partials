@@ -2,23 +2,23 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: frontend-skeleton
+  name: frontend-partials
   namespace: public
   labels:
-    k8s-app: frontend-skeleton
+    k8s-app: frontend-partials
 spec:
   replicas: 2
   selector:
     matchLabels:
-      k8s-app: frontend-skeleton
+      k8s-app: frontend-partials
   template:
     metadata:
       labels:
-        k8s-app: frontend-skeleton
+        k8s-app: frontend-partials
     spec:
       containers:
-      - name: frontend-skeleton
-        image: registry.gitlab.com/apolitical/frontend-skeleton:v1.1.0-beta.1.0
+      - name: frontend-partials
+        image: registry.gitlab.com/apolitical/frontend-partials:v1.1.0-beta.1.0
         imagePullPolicy: "IfNotPresent"
         ports:
         - containerPort: 80
@@ -29,19 +29,19 @@ spec:
               name: google-tag-manager-id
               key: GOOGLE_TAG_MANAGER_ID
       imagePullSecrets:
-      - name: gitlab-registry-frontend-skeleton
+      - name: gitlab-registry-frontend-partials
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: frontend-skeleton
+  name: frontend-partials
   namespace: public
   labels:
-    k8s-app: frontend-skeleton
+    k8s-app: frontend-partials
 spec:
   selector:
-    k8s-app: frontend-skeleton
+    k8s-app: frontend-partials
   ports:
   - port: 80
     protocol: TCP

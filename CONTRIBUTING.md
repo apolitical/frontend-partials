@@ -43,5 +43,5 @@ StackOverflow is an amazing community with full of really smart people.
 
 
 [pr-guide]: http://makeapullrequest.com/
-[issue]: https://github.com/apolitical/frontend-skeleton/issues/new
-[pull-request]: https://github.com/apolitical/frontend-skeleton/compare
+[issue]: https://github.com/apolitical/frontend-partials/issues/new
+[pull-request]: https://github.com/apolitical/frontend-partials/compare

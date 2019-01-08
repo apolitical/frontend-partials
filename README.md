@@ -1,9 +1,9 @@
 Frontend Skeleton
 =================
 
-[![GitHub release](https://img.shields.io/github/release/apolitical/frontend-skeleton.svg)](https://github.com/apolitical/frontend-skeleton/releases)
-[![GitHub license](https://img.shields.io/github/license/apolitical/frontend-skeleton.svg)](https://github.com/apolitical/frontend-skeleton/blob/master/LICENSE)
-[![CircleCI](https://img.shields.io/circleci/project/github/apolitical/frontend-skeleton/master.svg)](https://circleci.com/gh/apolitical/frontend-skeleton)
+[![GitHub release](https://img.shields.io/github/release/apolitical/frontend-partials.svg)](https://github.com/apolitical/frontend-partials/releases)
+[![GitHub license](https://img.shields.io/github/license/apolitical/frontend-partials.svg)](https://github.com/apolitical/frontend-partials/blob/master/LICENSE)
+[![CircleCI](https://img.shields.io/circleci/project/github/apolitical/frontend-partials/master.svg)](https://circleci.com/gh/apolitical/frontend-partials)
 
 This is a boilerplate for React Redux applications.
 

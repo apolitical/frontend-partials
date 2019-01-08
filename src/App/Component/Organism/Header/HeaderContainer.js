@@ -9,8 +9,8 @@ const { Header } = Organism;
 
 const mapStateToProps = (state, ownProps) => ({
   ...ownProps,
-  showVerticalNav: state.headerData.showVerticalNav,
-  showVerticalSearch: state.headerData.showVerticalSearch,
+  showVerticalNav: state.headerReducer.showVerticalNav,
+  showVerticalSearch: state.headerReducer.showVerticalSearch,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({

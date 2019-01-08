@@ -4,7 +4,7 @@ export type Interests = Array<string>;
 // Reusable Flow Types for all data structures passed through components
 // Component Specific Flow Types (i.e Prop Types) should be declared within the component
 
-export type ActionType = {
+export type Action = {
   type: string,
 };
 

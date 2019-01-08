@@ -1,6 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackCdnPlugin = require('webpack-cdn-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const webpackDefaults = require('./helpers/webpack.defaults');
 
@@ -65,24 +65,15 @@ const webpackConfig = {
   devtool: 'source-map',
   mode: prod ? 'production' : 'development',
 
-};
-
-if (!prod) {
-  webpackConfig.devtool = 'eval';
-}
-if (prod) {
-  webpackConfig.optimization = {
+  optimization: {
     minimizer: [
-      new UglifyJsPlugin({
-        uglifyOptions: {
-          compress: {
-            warnings: false,
-            drop_console: true,
-          },
-        },
+      new TerserPlugin({
+        test: /\.js(\?.*)?$/i,
+        parallel: true,
+        sourceMap: prod,
       }),
     ],
-  };
-}
+  },
+};
 
 module.exports = webpackConfig;

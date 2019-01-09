@@ -56,11 +56,8 @@ class HeaderApp extends Component<Props, State> {
   }
 }
 
-const reactAppElement = document.getElementById('header-app');
+const reactAppElements = Array.from(document.querySelectorAll('[data-partial-app=\'header\']'));
 
-if (reactAppElement instanceof Element) {
-  render(
-    <HeaderApp />,
-    reactAppElement,
-  );
-}
+reactAppElements
+  .filter((element) => element instanceof Element)
+  .forEach((element) => render(<HeaderApp />, element));

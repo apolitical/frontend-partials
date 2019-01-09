@@ -58,10 +58,10 @@ Build Runner:
   before_script:
     - cp -r /app/node_modules .
 
-Unit test:
-  <<: *quality
-  script:
-    - npm test
+#Unit test:
+#  <<: *quality
+#  script:
+#    - npm test
 
 Lint:
   <<: *quality

@@ -22,7 +22,7 @@
     "start:test": "nodemon --exec 'npm run test || true'",
     "test": "jest --coverage",
     "audit": "npm-audit-ci -h",
-    "preversion": "npm test && npm run lint && npm run flow",
+    "preversion": "npm run lint && npm run flow",
     "version": "npm run build",
     "postversion": "git push && git push --tags",
     "prepare": "npm run build"

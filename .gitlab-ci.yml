@@ -115,7 +115,11 @@ Docker Image:
 ###########
 Release:
   stage: Release
-  allow_failure: true
+  image:  $RUNNER_IMAGE
+  only:
+    - tags
+  before_script:
+    - cp -r /app/node_modules .
   script:
-    - echo ADD END TO END TESTS HERE
-    - "false"
+    - echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > .npmrc
+    - npm publish

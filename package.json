@@ -1,7 +1,7 @@
 {
   "name": "@apolitical/frontend-partials",
   "private": true,
-  "version": "0.0.0-beta.1",
+  "version": "0.1.0-beta.2.0",
   "description": "Frontend Partials for use in non react applications",
   "engines": {
     "node": "^10.11.0",

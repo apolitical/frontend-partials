@@ -1,6 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackCdnPlugin = require('webpack-cdn-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const webpackDefaults = require('./helpers/webpack.defaults');
 
@@ -10,20 +10,20 @@ const webpackConfig = {
   ...webpackDefaults,
 
   // Entry point
-  entry: './src/index.jsx',
+  entry: './src/HeaderApp.jsx',
 
   // All options relating to where files go when they're built
   output: {
-    path: `${__dirname}/dist/frontend-skeleton`,
-    filename: 'index.js',
-    publicPath: '/frontend-skeleton',
+    path: `${__dirname}/dist/frontend-partials`,
+    filename: 'header-app.js',
+    publicPath: '/frontend-partials',
   },
 
   // Dev server specific
   devServer: {
     stats: webpackDefaults.stats,
     historyApiFallback: {
-      index: '/frontend-skeleton/index.html',
+      index: '/frontend-partials/header-app.html',
     },
     proxy: {
       '/api/members': {
@@ -42,8 +42,8 @@ const webpackConfig = {
   // What plugins are used in the build process
   plugins: [
     new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: `${__dirname}/src/index.html`,
+      filename: 'header-app.html',
+      template: `${__dirname}/src/header-app.html`,
       title: 'React Application',
     }),
     new WebpackCdnPlugin({
@@ -55,7 +55,15 @@ const webpackConfig = {
           { name: 'react-redux', var: 'ReactRedux', path: `dist/react-redux${prod ? '.min' : ''}.js` },
           { name: 'react-router-dom', var: 'ReactRouterDOM', path: `umd/react-router-dom${prod ? '.min' : ''}.js` },
           { name: 'redux', var: 'Redux', path: `dist/redux${prod ? '.min' : ''}.js` },
+          { name: 'redux-saga', path: `dist/redux-saga${prod ? '.min' : ''}.js` },
           { name: 'styled-components', var: 'styled', path: `dist/styled-components${prod ? '.min' : ''}.js` },
+          // {
+          //   name: '@babel/polyfill',
+          //   var: 'BabelPolyfill',
+          //   path: `dist/polyfill${prod ? '.min' : ''}.js`
+          // },
+          // // Must come last
+          // { name: '@apolitical/styleguide', var: 'ApoliticalStyleguide', path: 'dist/index.js' },
         ],
       },
       publicPath: '../node_modules',
@@ -65,24 +73,19 @@ const webpackConfig = {
   devtool: 'source-map',
   mode: prod ? 'production' : 'development',
 
-};
-
-if (!prod) {
-  webpackConfig.devtool = 'eval';
-}
-if (prod) {
-  webpackConfig.optimization = {
+  optimization: {
     minimizer: [
-      new UglifyJsPlugin({
-        uglifyOptions: {
-          compress: {
-            warnings: false,
-            drop_console: true,
-          },
+      new TerserPlugin({
+        test: /\.js(\?.*)?$/i,
+        parallel: true,
+        sourceMap: prod,
+        terserOptions: {
+          compress: true,
+          mangle: true,
         },
       }),
     ],
-  };
-}
+  },
+};
 
 module.exports = webpackConfig;

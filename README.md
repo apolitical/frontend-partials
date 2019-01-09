@@ -1,18 +1,39 @@
 Frontend Skeleton
 =================
 
-[![GitHub release](https://img.shields.io/github/release/apolitical/frontend-skeleton.svg)](https://github.com/apolitical/frontend-skeleton/releases)
-[![GitHub license](https://img.shields.io/github/license/apolitical/frontend-skeleton.svg)](https://github.com/apolitical/frontend-skeleton/blob/master/LICENSE)
-[![CircleCI](https://img.shields.io/circleci/project/github/apolitical/frontend-skeleton/master.svg)](https://circleci.com/gh/apolitical/frontend-skeleton)
+[![GitHub release](https://img.shields.io/github/release/apolitical/frontend-partials.svg)](https://github.com/apolitical/frontend-partials/releases)
+[![GitHub license](https://img.shields.io/github/license/apolitical/frontend-partials.svg)](https://github.com/apolitical/frontend-partials/blob/master/LICENSE)
+[![CircleCI](https://img.shields.io/circleci/project/github/apolitical/frontend-partials/master.svg)](https://circleci.com/gh/apolitical/frontend-partials)
 
 This is a boilerplate for React Redux applications.
 
 Usage
 -----
 
-Either
-- Fork
-- Clone, then push to new repo
+### Header
+
+Include the header.js script, you can use unpkg to get this.
+Where you want to place the header, add an element with a data attribute `partial-app` set to
+`header`:
+
+```html
+<div data-partial-app="header"></div>
+```
+
+By default, the header will not react to someone being logged out. If you wish for something else to
+happen (such as a redirect) you can pass in the name of a function in the global scope using the
+`header-logged-out` data attribute;
+
+```html
+<script>
+function goToLogin(e) {
+    // console.error(e);
+    window.location = '/login';
+}
+</script>
+<div data-partial-app="header" data-header-logged-out="goToLogin"></div>
+```
+
 
 Versioning
 ----------

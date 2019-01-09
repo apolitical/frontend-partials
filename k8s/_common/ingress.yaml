@@ -2,17 +2,17 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: frontend-skeleton
+  name: frontend-partials
   namespace: public
   labels:
-    k8s-app: frontend-skeleton
+    k8s-app: frontend-partials
   annotations:
     kubernetes.io/ingress.class: traefik
 spec:
   rules:
   - http:
       paths:
-      - path: /frontend-skeleton
+      - path: /frontend-partials
         backend:
-          serviceName: frontend-skeleton
+          serviceName: frontend-partials
           servicePort: 80

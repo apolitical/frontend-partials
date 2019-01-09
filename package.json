@@ -1,21 +1,22 @@
 {
-  "name": "frontend-skeleton",
+  "name": "frontend-partials",
   "private": true,
-  "version": "1.1.0-beta.1.0",
-  "description": "Skeleton frontend application for Apolitical",
-  "main": "index.js",
+  "version": "0.0.0-beta.1",
+  "description": "Frontend Partials for use in non react applications",
   "engines": {
     "node": "^10.11.0",
     "npm": "^6.4.1"
   },
   "scripts": {
     "coverage": "codecov -f coverage/lcov.txt",
-    "build": "NODE_ENV=production webpack --config webpack.config.js",
+    "build": "npm run build:header",
+    "build:header": "NODE_ENV=production webpack --config webpack.header.config.js",
     "dev": "concurrently --names 'SRVR,TEST,LINT,FLOW'  -c 'black.bgCyan.bold,bgBlue.bold,bgMagenta.bold,black.bgGreen.bold' 'npm run start' 'npm run start:test' 'npm run start:lint' 'npm run start:flow'",
     "flow": "flow",
     "lint": "eslint --ext .jsx --ext .js src/",
     "quality": "concurrently --names 'TEST,LINT,FLOW' -c 'bgBlue.bold,bgMagenta.bold,black.bgGreen.bold' 'npm run test' 'npm run lint' 'npm run flow'",
-    "start": "NODE_ENV=development webpack-dev-server -d --open",
+    "start": "concurrently --names 'HEAD' 'npm run start:header'",
+    "start:header": "NODE_ENV=development webpack-dev-server -d --open --config webpack.header.config.js",
     "start:flow": "nodemon --exec 'npm run flow || true'",
     "start:lint": "nodemon --exec 'npm run lint || true'",
     "start:test": "nodemon --exec 'npm run test || true'",
@@ -27,15 +28,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/apolitical/frontend-skeleton.git"
+    "url": "git+https://github.com/apolitical/frontend-partials.git"
   },
   "author": "Daniel Mason <daniel.mason@apolitical.co>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/apolitical/frontend-skeleton/issues"
+    "url": "https://github.com/apolitical/frontend-partials/issues"
   },
-  "homepage": "https://github.com/apolitical/frontend-skeleton#readme",
+  "homepage": "https://github.com/apolitical/frontend-partials#readme",
   "dependencies": {
+    "@apolitical/styleguide": "3.2.0-beta.1.0",
     "@babel/polyfill": "^7.2.5",
     "core-decorators": "^0.20.0",
     "isomorphic-fetch": "^2.2.1",
@@ -45,6 +47,7 @@
     "react-router-dom": "^4.3.1",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.7",
+    "redux-saga": "^0.16.2",
     "styled-components": "^4.1.3"
   },
   "devDependencies": {
@@ -63,15 +66,16 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "codecov": "^3.1.0",
     "concurrently": "^4.1.0",
+    "deep-freeze": "0.0.1",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
-    "eslint": "^5.11.1",
+    "eslint": "^5.12.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-flow-header": "^0.2.0",
-    "eslint-plugin-flowtype": "^3.2.0",
+    "eslint-plugin-flowtype": "^3.2.1",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
-    "eslint-plugin-react": "^7.12.2",
+    "eslint-plugin-react": "^7.12.3",
     "flow-bin": "^0.89.0",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^23.6.0",
@@ -80,10 +84,10 @@
     "nyc": "^13.1.0",
     "puppeteer": "^1.11.0",
     "regenerator-runtime": "^0.13.1",
-    "uglifyjs-webpack-plugin": "^2.1.1",
+    "terser-webpack-plugin": "^1.2.1",
     "webpack": "^4.28.3",
     "webpack-cdn-plugin": "^2.3.3",
-    "webpack-cli": "^3.2.0",
+    "webpack-cli": "^3.2.1",
     "webpack-dev-server": "^3.1.14"
   }
 }

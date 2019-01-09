@@ -1,5 +1,5 @@
 {
-  "name": "frontend-partials",
+  "name": "@apolitical/frontend-partials",
   "private": true,
   "version": "0.0.0-beta.1",
   "description": "Frontend Partials for use in non react applications",
@@ -24,7 +24,8 @@
     "audit": "npm-audit-ci -h",
     "preversion": "npm test && npm run lint && npm run flow",
     "version": "npm run build",
-    "postversion": "git push && git push --tags"
+    "postversion": "git push && git push --tags",
+    "prepare": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -35,6 +36,14 @@
   "bugs": {
     "url": "https://github.com/apolitical/frontend-partials/issues"
   },
+  "files": [
+    "dist/**",
+    "CHANGELOG.md",
+    "CODE_OF_CONDUCT.md",
+    "CONTRIBUTING.md",
+    "LICENSE",
+    "README.md"
+  ],
   "homepage": "https://github.com/apolitical/frontend-partials#readme",
   "dependencies": {
     "@apolitical/styleguide": "3.2.0-beta.1.0",

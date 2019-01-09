@@ -23,7 +23,7 @@ const webpackConfig = {
   devServer: {
     stats: webpackDefaults.stats,
     historyApiFallback: {
-      index: '/frontend-partials/index.html',
+      index: '/frontend-partials/header-app.html',
     },
     proxy: {
       '/api/members': {
@@ -42,8 +42,8 @@ const webpackConfig = {
   // What plugins are used in the build process
   plugins: [
     new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: `${__dirname}/src/index.html`,
+      filename: 'header-app.html',
+      template: `${__dirname}/src/header-app.html`,
       title: 'React Application',
     }),
     new WebpackCdnPlugin({

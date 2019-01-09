@@ -20,6 +20,20 @@ Where you want to place the header, add an element with a data attribute `partia
 <div data-partial-app="header"></div>
 ```
 
+By default, the header will not react to someone being logged out. If you wish for something else to
+happen (such as a redirect) you can pass in the name of a function in the global scope using the
+`header-logged-out` data attribute;
+
+```html
+<script>
+function goToLogin(e) {
+    // console.error(e);
+    window.location = '/login';
+}
+</script>
+<div data-partial-app="header" data-header-logged-out="goToLogin"></div>
+```
+
 
 Versioning
 ----------

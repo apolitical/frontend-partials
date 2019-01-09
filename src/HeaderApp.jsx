@@ -22,7 +22,9 @@ const reducers = combineReducers({
 });
 const store = createStore(reducers);
 
-type Props = {}
+type Props = {
+  loggedOutFunction: () => void,
+}
 
 type State = {
   me: ?Member,
@@ -37,9 +39,10 @@ class HeaderApp extends Component<Props, State> {
   }
 
   componentWillMount() {
+    const { loggedOutFunction } = this.props;
     getMember('me')
       .then((me) => this.setState({ me }))
-      .catch(() => { window.location = '/login'; });
+      .catch(loggedOutFunction);
   }
 
   render() {
@@ -60,4 +63,13 @@ const reactAppElements = Array.from(document.querySelectorAll('[data-partial-app
 
 reactAppElements
   .filter((element) => element instanceof Element)
-  .forEach((element) => render(<HeaderApp />, element));
+  .map((element) => {
+    if (Object.hasOwnProperty.call(element.dataset, 'headerLoggedOut')) {
+      const loggedOutFunctionName = element.dataset.headerLoggedOut;
+      if (Object.hasOwnProperty.call(window, loggedOutFunctionName) && typeof window[loggedOutFunctionName] === 'function') {
+        return [element, window[loggedOutFunctionName]];
+      }
+    }
+    return [element, () => {}];
+  })
+  .forEach(([element, loggedOut]) => render(<HeaderApp loggedOutFunction={loggedOut} />, element));

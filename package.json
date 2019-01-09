@@ -9,7 +9,8 @@
   },
   "scripts": {
     "coverage": "codecov -f coverage/lcov.txt",
-    "build": "NODE_ENV=production webpack --config webpack.config.js",
+    "build": "npm run build:header",
+    "build:header": "NODE_ENV=production webpack --config webpack.header.config.js",
     "dev": "concurrently --names 'SRVR,TEST,LINT,FLOW'  -c 'black.bgCyan.bold,bgBlue.bold,bgMagenta.bold,black.bgGreen.bold' 'npm run start' 'npm run start:test' 'npm run start:lint' 'npm run start:flow'",
     "flow": "flow",
     "lint": "eslint --ext .jsx --ext .js src/",

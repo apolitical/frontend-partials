@@ -10,9 +10,16 @@ This is a boilerplate for React Redux applications.
 Usage
 -----
 
-Either
-- Fork
-- Clone, then push to new repo
+### Header
+
+Include the header.js script, you can use unpkg to get this.
+Where you want to place the header, add an element with a data attribute `partial-app` set to
+`header`:
+
+```html
+<div data-partial-app="header"></div>
+```
+
 
 Versioning
 ----------

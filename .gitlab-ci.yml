@@ -30,7 +30,6 @@ variables:
 stages:
   - Prepare     # Prepare the tools we'll need for the rest of the pipeline
   - Quality     # Quality checks, unit tests, lints, etc
-  - Build       # If tagged: Build the docker image and put it in the registry
   - Release     # Release the artifact
 
 ###########
@@ -90,25 +89,6 @@ Dependencies:
   allow_failure: true
   script:
     - npm outdated
-
-#########
-# Build #
-#########
-Docker Image:
-  stage: Build
-  only:
-    - tags
-  image: docker:stable
-  services:
-    - docker:dind
-  variables:
-    DOCKER_HOST: tcp://localhost:2375
-    DOCKER_DRIVER: overlay2
-  before_script:
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-  script:
-    - docker build . -t $ARTIFACT_IMAGE
-    - docker push $ARTIFACT_IMAGE
 
 ###########
 # Release #

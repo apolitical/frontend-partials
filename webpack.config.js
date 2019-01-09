@@ -79,6 +79,10 @@ const webpackConfig = {
         test: /\.js(\?.*)?$/i,
         parallel: true,
         sourceMap: prod,
+        terserOptions: {
+          compress: true,
+          mangle: true,
+        },
       }),
     ],
   },

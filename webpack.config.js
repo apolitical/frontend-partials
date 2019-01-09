@@ -50,7 +50,6 @@ const webpackConfig = {
       prod,
       modules: {
         react: [
-          { name: '@babel/polyfill', var: 'BabelPolyfill', path: `dist/polyfill${prod ? '.min' : ''}.js` },
           { name: 'react', var: 'React', path: `umd/react.${prod ? 'production.min' : 'development'}.js` },
           { name: 'react-dom', var: 'ReactDOM', path: `umd/react-dom.${prod ? 'production.min' : 'development'}.js` },
           { name: 'react-redux', var: 'ReactRedux', path: `dist/react-redux${prod ? '.min' : ''}.js` },
@@ -58,6 +57,13 @@ const webpackConfig = {
           { name: 'redux', var: 'Redux', path: `dist/redux${prod ? '.min' : ''}.js` },
           { name: 'redux-saga', path: `dist/redux-saga${prod ? '.min' : ''}.js` },
           { name: 'styled-components', var: 'styled', path: `dist/styled-components${prod ? '.min' : ''}.js` },
+          // {
+          //   name: '@babel/polyfill',
+          //   var: 'BabelPolyfill',
+          //   path: `dist/polyfill${prod ? '.min' : ''}.js`
+          // },
+          // // Must come last
+          // { name: '@apolitical/styleguide', var: 'ApoliticalStyleguide', path: 'dist/index.js' },
         ],
       },
       publicPath: '../node_modules',

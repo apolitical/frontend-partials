@@ -36,7 +36,7 @@
     "url": "https://github.com/apolitical/frontend-partials/issues"
   },
   "files": [
-    "dist/**",
+    "dist/**/*",
     "CHANGELOG.md",
     "CODE_OF_CONDUCT.md",
     "CONTRIBUTING.md",

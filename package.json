@@ -24,7 +24,7 @@
     "preversion": "npm run lint && npm run flow",
     "version": "npm run build",
     "postversion": "git push && git push --tags",
-    "prepare": "npm run build"
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",

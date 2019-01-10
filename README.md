@@ -35,6 +35,19 @@ function goToLogin(e) {
 ```
 
 
+### Footer
+
+Include the footer.js script, you can use unpkg to get this.
+Where you want to place the header, add an element with a data attribute `partial-app` set to
+`footer`:
+
+```html
+<div data-partial-app="footer"></div>
+```
+
+There are no options for the footer.
+
+
 Versioning
 ----------
 

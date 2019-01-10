@@ -10,13 +10,16 @@ const webpackConfig = {
   ...webpackDefaults,
 
   // Entry point
-  entry: './src/HeaderApp.jsx',
+  entry: {
+    header: './src/HeaderApp.jsx',
+    footer: './src/FooterApp.jsx',
+  },
 
   // All options relating to where files go when they're built
   output: {
-    path: `${__dirname}/dist/frontend-partials`,
-    filename: 'header-app.js',
-    publicPath: '/frontend-partials',
+    path: `${__dirname}/dist`,
+    filename: '[name].js',
+    publicPath: '/',
   },
 
   // Dev server specific
@@ -42,8 +45,8 @@ const webpackConfig = {
   // What plugins are used in the build process
   plugins: [
     new HtmlWebpackPlugin({
-      filename: 'header-app.html',
-      template: `${__dirname}/src/header-app.html`,
+      filename: 'index.html',
+      template: `${__dirname}/src/index.html`,
       title: 'React Application',
     }),
     new WebpackCdnPlugin({
@@ -74,6 +77,10 @@ const webpackConfig = {
   mode: prod ? 'production' : 'development',
 
   optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
+
     minimizer: [
       new TerserPlugin({
         test: /\.js(\?.*)?$/i,

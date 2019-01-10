@@ -103,5 +103,5 @@ Release:
   before_script:
     - cp -r /app/node_modules .
   script:
-    - echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > .npmrc
+    - echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > ~/.npmrc
     - npm publish

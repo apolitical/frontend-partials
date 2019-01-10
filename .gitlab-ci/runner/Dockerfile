@@ -1,11 +1,13 @@
-FROM node:10-stretch
-
-LABEL maintainer="engineering@apolitical.co"
+FROM node:10-stretch-slim
 
 WORKDIR /app
 
-COPY package.json .
+RUN chown 1000:1000 .
 
-COPY package-lock.json .
+USER 1000
+
+LABEL maintainer="engineering@apolitical.co"
+
+COPY . .
 
 RUN npm install

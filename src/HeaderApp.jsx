@@ -11,7 +11,6 @@ import ApoliticalBrand from './App/Theme/ApoliticalBrand';
 import ApoliticalGlobalStyles from './App/Theme/ApoliticalGlobalStyles';
 import { headerReducer } from './App/Component/Organism/Header/HeaderReducer';
 
-import '@babel/polyfill';
 import type { Member } from './types';
 import { getMember } from './App/Api/api';
 

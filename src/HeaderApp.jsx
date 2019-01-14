@@ -2,22 +2,16 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { combineReducers, createStore } from 'redux';
-import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
+import { Organism } from '@apolitical/styleguide';
 
-import Header from './App/Component/Organism/Header/HeaderContainer';
 import ApoliticalBrand from './App/Theme/ApoliticalBrand';
 import ApoliticalGlobalStyles from './App/Theme/ApoliticalGlobalStyles';
-import { headerReducer } from './App/Component/Organism/Header/HeaderReducer';
 
 import type { Member } from './types';
 import { getMember } from './App/Api/api';
 
-const reducers = combineReducers({
-  headerReducer,
-});
-const store = createStore(reducers);
+const { Header } = Organism;
 
 type Props = {
   loggedOutFunction: () => void,
@@ -44,14 +38,14 @@ class HeaderApp extends Component<Props, State> {
 
   render() {
     return (
-      <Provider store={store}>
+      <>
         <ApoliticalGlobalStyles />
         <BrowserRouter>
           <ThemeProvider theme={ApoliticalBrand}>
             <Header {...this.state} />
           </ThemeProvider>
         </BrowserRouter>
-      </Provider>
+      </>
     );
   }
 }

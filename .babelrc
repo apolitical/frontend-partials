@@ -3,11 +3,11 @@
     [
       "@babel/env",
       {
-        "targets": {
-          "browsers": [
-            "last 2 versions"
-          ]
-        }
+        "targets": [
+          "last 2 versions",
+          "ie 9"
+        ]
+
       }
     ],
     "@babel/flow",

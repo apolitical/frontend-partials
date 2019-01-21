@@ -20,9 +20,9 @@
     "test": "jest --coverage",
     "audit": "npm-audit-ci -h",
     "preversion": "npm run lint && npm run flow",
-    "version": "npm run build",
+    "version": "echo skipping npm run build",
     "postversion": "git push && git push --tags",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "echo skipping npm run build"
   },
   "repository": {
     "type": "git",

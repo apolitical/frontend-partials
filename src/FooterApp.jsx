@@ -8,8 +8,6 @@ import { Organism } from '@apolitical/styleguide';
 import ApoliticalBrand from './App/Theme/ApoliticalBrand';
 import ApoliticalGlobalStyles from './App/Theme/ApoliticalGlobalStyles';
 
-import '@babel/polyfill';
-
 const { Footer } = Organism;
 
 const FooterApp = () => (

@@ -53,13 +53,13 @@ const webpackConfig = {
       prod,
       modules: {
         react: [
-          // // Must come first
+          // Must come first
           { name: '@babel/polyfill', var: 'BabelPolyfill', path: `dist/polyfill${prod ? '.min' : ''}.js` },
           { name: 'react', var: 'React', path: `umd/react.${prod ? 'production.min' : 'development'}.js` },
           { name: 'react-dom', var: 'ReactDOM', path: `umd/react-dom.${prod ? 'production.min' : 'development'}.js` },
           { name: 'react-router-dom', var: 'ReactRouterDOM', path: `umd/react-router-dom${prod ? '.min' : ''}.js` },
           { name: 'styled-components', var: 'styled', path: `dist/styled-components${prod ? '.min' : ''}.js` },
-          // // Must come last
+          // Must come last
           { name: '@apolitical/styleguide', var: 'ApoliticalStyleguide', path: 'dist/umd.js' },
         ],
       },

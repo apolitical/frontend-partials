@@ -63,7 +63,7 @@ const webpackConfig = {
           //   path: `dist/polyfill${prod ? '.min' : ''}.js`
           // },
           // // Must come last
-          // { name: '@apolitical/styleguide', var: 'ApoliticalStyleguide', path: 'dist/index.js' },
+          { name: '@apolitical/styleguide', var: 'ApoliticalStyleguide', path: 'dist/umd.js' },
         ],
       },
       publicPath: '../node_modules',

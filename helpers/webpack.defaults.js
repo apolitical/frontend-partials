@@ -1,4 +1,6 @@
 // Base Webpack config that will be used by other configs.
+const options = require('./babel.config');
+
 module.exports = {
   // How to find files that will be loaded
   // extensions - When you import or require a file, what suffixes can be omitted
@@ -12,17 +14,7 @@ module.exports = {
       {
         test: /\.jsx?$/,
         loader: 'babel-loader',
-        options: {
-          presets: [
-            ['@babel/env', { targets: ['last 2 versions', 'ie 9'] }],
-            '@babel/flow',
-            '@babel/react',
-          ],
-          plugins: [
-            ['@babel/plugin-proposal-object-rest-spread', { useBuiltIns: true }],
-            'transform-class-properties',
-          ],
-        },
+        options,
       },
     ],
   },
